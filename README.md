@@ -1,18 +1,17 @@
 <div align="center">
 	<br>
-	<br>
-  <p><a href="https://mifi.no/losslesscut/"><img src="src/icon.svg" width="130" alt="LosslessCut" /></a></p>
+  <p><a href="https://mifi.no/losslesscut/"><img src="src/renderer/src/icon.svg" width="120" alt="LosslessCut" /></a></p>
   <p><b>LosslessCut</b></p>
   The swiss army knife of lossless video/audio editing
 	<br>
   <img src="https://github.com/mifi/lossless-cut/workflows/Build/release/badge.svg" />
-  <a href="https://paypal.me/mifino/usd"><img src="https://img.shields.io/badge/Donate-PayPal-green.svg" /></a> <a href="https://github.com/mifi/lossless-cut#download"><img src="https://img.shields.io/github/v/release/mifi/lossless-cut" /></a> <a href="https://discord.gg/fhnEREfUJ3"><img src="https://img.shields.io/discord/986051448385183804" /></a>
+  <a href="https://paypal.me/mifino/usd"><img src="https://img.shields.io/badge/Donate-PayPal-green.svg" /></a> <a href="https://github.com/mifi/lossless-cut#download"><img src="https://img.shields.io/github/v/release/mifi/lossless-cut" /></a> <a href="https://discord.gg/fhnEREfUJ3"><img src="https://img.shields.io/discord/986051448385183804" /></a> <a href="https://twitter.com/losslesscut"><img src="https://img.shields.io/twitter/follow/losslesscut?label=Twitter&style=social" alt="Twitter"></a>
 	<br>
 	<br>
   <a href="https://mifi.no/thanks/">Thanks to my supporters</a> and everyone who purchased LosslessCut!
 	<br>
 	<br>
-  <p align="center"><img src="https://github.com/mifi/lossless-cut/raw/master/main_screenshot.jpg" width="600" alt="screenshot" /></p>
+  <p align="center"><img src="main_screenshot.jpg" width="600" alt="screenshot" /></p>
 	<br>
 	<br>
 </div>
@@ -32,10 +31,13 @@ The main feature is lossless trimming and cutting of video and audio files, whic
   - Remove unneeded tracks
   - Replace or re-encode only some tracks
   - Extract all tracks from a file (extract video, audio, subtitle, attachments and other tracks from one file into separate files)
-- Batch view for fast multi-file workflow
+- Fast multi-file workflow (note: no mass/batch export yet)
 - Keyboard shortcut workflow
 - Losslessly remux video/audio into a different container (file) format
-- Take full-resolution snapshots from videos in JPEG/PNG format, or export ranges of video frames to images
+- Take full-resolution snapshots from videos in JPEG/PNG format (low or high quality)
+- Export ranges of video frames to images (every nth frame, second, by scene change, best thumbnails)
+  - Export only from a selected time range (segment)
+  - Optionally include original timestamps in image file names
 - Manual input of cutpoint times
 - Apply a per-file timecode offset (and auto load timecode from file)
 - Edit file metadata, per-track metadata and per-track disposition
@@ -52,9 +54,12 @@ The main feature is lossless trimming and cutting of video and audio files, whic
 - MKV/MP4 embedded chapters marks editor
 - View subtitles
 - Customizable keyboard hotkeys
-- Black scene detection
+- Black scene detection, silent audio detection, and scene change detection
 - Divide timeline into segments with length L or into N segments or even randomized segments!
-- [Basic CLI support](cli.md)
+- Speed up / slow down video or audio file ([changing FPS](https://github.com/mifi/lossless-cut/issues/1712))
+- Basic [CLI](cli.md) and [HTTP API](api.md)
+- Show (DJI) embedded GPS track on a map
+- Losslessly Download videos over HTTP (e.g. HLS `.m3u8`)
 
 ## Example lossless use cases
 
@@ -77,6 +82,10 @@ The main feature is lossless trimming and cutting of video and audio files, whic
 - Loop a video / audio clip X times quickly without re-encoding
   - See [#284](https://github.com/mifi/lossless-cut/issues/284)
 - Convert a video or parts of it into X image files (not lossless)
+- Losslessly split a video into one file per scene (note you probably have to shift segments, see [#330](https://github.com/mifi/lossless-cut/issues/330).)
+- Cut away silent parts of an audio/video
+- Split video into segments to for example respect Twitter's 140 second limit
+- Annotate each segment with one or more tags, then use those tags to organize your segments or use it to create an output folder structure or hierarchy for your segments.
 
 ### Export cut times as YouTube Chapters
 1. Export with Merge and "Create chapters from merged segments" enabled
@@ -96,37 +105,39 @@ First export each track as individual files. Then use Handbrake or similar to re
 
 ## Download
 
-If you want to support my continued work on LosslessCut, and you want the advantage of a secure and simple installation process with automatic updates, consider getting it from your favorite store:
+If you want to support my continued work on LosslessCut, and you want the advantage of a secure and simple installation process with automatic, stable updates, consider getting it from your favorite store:
 
-<a href="https://apps.apple.com/app/id1505323402"><img src="mac-app-store-badge.svg" alt="Mac App Store" height="50"/></a> <a href="https://www.microsoft.com/store/apps/9P30LSR4705L?cid=storebadge&ocid=badge"><img src="ms-store-badge.svg" alt="MS badge" height="50"/></a> <a href="https://snapcraft.io/losslesscut"><img src="https://snapcraft.io/static/images/badges/en/snap-store-black.svg" alt="Snapcraft" height="50"/></a>
+<a href="https://apps.apple.com/app/id1505323402"><img src="mac-app-store-badge.svg" alt="Mac App Store" height="50"/></a> <a href="https://www.microsoft.com/store/apps/9P30LSR4705L?cid=storebadge&ocid=badge"><img src="ms-store-badge.svg" alt="MS badge" height="50"/></a>
+
+For Linux these are some alternatives:
+
+<a href="https://snapcraft.io/losslesscut"><img src="https://github.com/mifi/lossless-cut/raw/master/snap-store-black.svg?sanitize=true" alt="Snapcraft" height="50"/></a> <a href="https://flathub.org/apps/details/no.mifi.losslesscut"><img src="https://github.com/mifi/lossless-cut/raw/master/flathub-badge.svg?sanitize=true" alt="Flathub" height="50"/></a>
 
 If you prefer to download the executables manually, this will of course always be free:
 
-- Mac OS X: [Intel DMG](https://github.com/mifi/lossless-cut/releases/latest/download/LosslessCut-mac-x64.dmg) / [Apple Silicon DMG](https://github.com/mifi/lossless-cut/releases/latest/download/LosslessCut-mac-arm64.dmg)
-- Windows: [7zip](https://github.com/mifi/lossless-cut/releases/latest/download/LosslessCut-win-x64.7z)
+- Mac OS X: [Intel DMG](https://github.com/mifi/lossless-cut/releases/latest/download/LosslessCut-mac-x64.dmg) / [Apple Silicon DMG](https://github.com/mifi/lossless-cut/releases/latest/download/LosslessCut-mac-arm64.dmg) (note that universal.pkg **does not work**)
+- Windows: [7zip](https://github.com/mifi/lossless-cut/releases/latest/download/LosslessCut-win-x64.7z) (Windows 7, 8 and 8.1 is [no longer supported](https://github.com/mifi/lossless-cut/discussions/1476) after [v3.50.0](https://github.com/mifi/lossless-cut/releases/tag/v3.50.0))
 - Linux: [x64 tar.bz2](https://github.com/mifi/lossless-cut/releases/latest/download/LosslessCut-linux-x64.tar.bz2) / [x64 AppImage](https://github.com/mifi/lossless-cut/releases/latest/download/LosslessCut-linux-x86_64.AppImage) / [arm64 tar.bz2](https://github.com/mifi/lossless-cut/releases/latest/download/LosslessCut-linux-arm64.tar.bz2) / [Raspberry Pi armv7l](https://github.com/mifi/lossless-cut/releases/latest/download/LosslessCut-linux-armv7l.tar.bz2)
 - [More releases](https://github.com/mifi/lossless-cut/releases) (note that APPX for Windows and PKG for MacOS **do not work**)
+- [Download latest nightly builds 🧪](https://mifi.no/llc/nightly/).
 
-If you find LosslessCut useful, I'm very thankful for [donations](https://github.com/mifi/lossless-cut#donate-).
+If you find LosslessCut useful, I'm very thankful for [your support](https://github.com/mifi/lossless-cut#donate-).
 
-### Difference between App Stores and GitHub download
+What's the **difference between App Stores and GitHub download?** [Please see FAQ](issues.md#app-stores-and-github-difference)
 
-They have exactly the same in-app features, except for a few platform limitations. Apple doesn't allow opening VOB files with App Store apps. Apple App Store apps need to prompt for output directory. LosslessCut version in the App Stores is a few versions behind the GitHub version, because I want to be sure that the new versions work perfectly before releasing in the App Stores. GitHub version can contain new, untested features and may contain some bugs. I consider the newest GitHub versions to be a public "beta" test.
+## [Supported operating systems](./requirements.md)
 
 ## Supported formats
 
-Since LosslessCut is based on Chromium and uses the HTML5 video player, not all FFmpeg supported formats will be supported smoothly.
-The following formats/codecs should generally work: MP4, MOV, WebM, MKV, OGG, WAV, MP3, AAC, H264, Theora, VP8, VP9
-For more information about supported formats / codecs, see https://www.chromium.org/audio-video.
+LosslessCut uses Chromium's HTML5 video player, and not all FFmpeg supported formats and codecs are natively supported. Generally, the following formats should work: `MP4`, `MOV`, `WebM`, `Matroska`, `OGG` and `WAV`. The following audio codecs: `FLAC`, `MP3`, `Opus`, `PCM`, `Vorbis` and `AAC`. Video codecs: `H264`, `AV1`, `Theora`, `VP8`, `VP9` and `H265` (needs hardware decoder). More information about [Chromium supported formats / codecs](https://www.chromium.org/audio-video). [What's the difference between a codec and a format?](./issues.md#primer-video--audio-formats-vs-codecs)
 
-Unsupported files can still be converted to a supported format/codec from the `File` menu. (Try the "fastest" option first.) A low quality version of the file (with/without audio) will then be created and opened in the player. The actual cut/export operation will still be performed on the original file, so it will be lossless. This allows for potentially opening any file that FFmpeg is able to decode.
+Codecs and formats not listed above can still be converted to a supported format/codec from the `File` menu. (Try the `fastest` option first.) A low quality version of the file (with/without audio) will then be created and opened in the player. The actual cut/export operation will still be performed on the original file, so it will be lossless. This allows for potentially opening any file that FFmpeg is able to decode.
 
 ## Video demos
 
 - [Common features](https://www.youtube.com/watch?v=pYHMxXy05Jg)
 - [How to add a thumbnail / cover art to an MP4](https://www.youtube.com/watch?v=4pYJ93cn80E)
 - [How to add multi-language audio to a video](https://www.youtube.com/watch?v=MRBGDsuw_WU)
-
 - **Your video here?** If you would like to make a video showing off LosslessCut use cases, let me know and I can link it here!
 
 ### Typical workflow
@@ -149,16 +160,20 @@ Unsupported files can still be converted to a supported format/codec from the `F
 - Press the **Camera** button (or <kbd>C</kbd>) if you want to take a JPEG/PNG snapshot from the current time
 - If you want to move the original file to trash, press the **trash** button
 - For best results you may need to trial and error with another output format (Matroska takes nearly everything), change keyframe cut mode or disable some tracks (see [known issues](issues.md)).
-- Press <kbd>H</kbd> to view help and all keyboard shortcuts.
+- Press <kbd>SHIFT</kbd> + <kbd>/</kbd> to view all keyboard & mouse shortcuts.
 - **Note:** The original video file will not be modified. Instead, a file is created file in the same directory as the original file with from/to timestamps in the file name.
+
+## [Installation](./installation.md)
 
 ## [Import / export](import-export.md)
 
-## [Command line interface (CLI)](cli.md)
-
-## [Developer notes](developer-notes.md)
+## [Command line interface (CLI)](cli.md) & [HTTP API](api.md)
 
 ## [Known issues, limitations, troubleshooting, FAQ](issues.md)
+
+## [Contributing](CONTRIBUTING.md)
+
+## [Translation](translation.md)
 
 If you have any problem or question, [please read this](issues.md) before creating an issue. I try to answer most common questions here.
 
@@ -168,16 +183,21 @@ This project is maintained by me alone. The project will always remain free and 
 
 [Paypal](https://paypal.me/mifino/usd) | [crypto](https://mifi.no/thanks)
 
-## Articles
+## Featured
 
 - [Featured in the Console newsletter](https://console.substack.com/p/console-93)
+- Hacker News [2024](https://news.ycombinator.com/item?id=40829494) [2022](https://news.ycombinator.com/item?id=33969490) [2020-10](https://news.ycombinator.com/item?id=24883030) [2020-01](https://news.ycombinator.com/item?id=22026412) [2016](https://news.ycombinator.com/item?id=12885585)
+- [LosslessCut on Wikipedia](https://en.m.wikipedia.org/wiki/LosslessCut)
+- Your link here?
+
+<img src="https://api.star-history.com/svg?repos=mifi/lossless-cut&type=Date" alt="Star History Chart" width="400px" />
 
 ## Attributions
 - App icon made by [Dimi Kazak](http://www.flaticon.com/authors/dimi-kazak "Dimi Kazak") from [www.flaticon.com](http://www.flaticon.com "Flaticon") is licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/ "Creative Commons BY 3.0")
 - [Lottie animation](https://lottiefiles.com/7077-magic-flow)
 - Thanks to Adi Abinun for his UI sketch work, inspiration and guidance
 - [Thanks to everyone for supporting](https://mifi.no/thanks/) my open source work 🙌
-- Thanks to translators who helped translate the app. [You can too!](https://hosted.weblate.org/projects/losslesscut/losslesscut/)
+- Thanks to translators who helped translate the app. [You can too!](translation.md)
 
 ## More software
 
